@@ -102,6 +102,7 @@
 打印结果
 	
 	--------==------
+	
 	1.int && int                          ->A0==B0,true
 	2.int && new Integer                  ->A0==E1,true
 	3.int && Integer.value                ->A0==F1,true
