@@ -1,7 +1,7 @@
 # Integer类
 	
 ## 前言
-	Integer是Java中最基本的类，但平时我们写代码的时候用的多的是int,我们知道Java中存在语法糖用于二者的替换
+	Integer是Java中最基本的类，但平时我们写代码的时候用的多的是int,我们知道Java中存在语法糖中的自动装箱与拆箱用于二者的替换
 	面试中经常会问Integer跟int的区别，或者出一些Integer跟int是否相等的问题，
 	对于这类问题，首先我们不能靠背，我们应该要去理解一下Integer类。
 
@@ -139,3 +139,10 @@ Process finished with exit code 0
 第二种当对象与对象==时，只有都从IntegerCache中取（Integer，Integer.vauleOf()值在[-128,127]）才会返回true。
 
 第三种就是对象间的equals,返回true
+
+## 附加
+
+	Integer a = 200;
+	double b = 200;
+	System.out.println(a == b); //true
+	两者都会先拆箱比较值
