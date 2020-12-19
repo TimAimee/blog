@@ -2,12 +2,13 @@
 	
 ## 前言
 
-	try-catch-finally-return的问题一直萦绕在我的心中，正所谓念念不忘，必有回想，想一次性解决这个疑难杂症。
+	可能是我们村写的最好的
+	try-catch-finally-return的问题一直萦绕在我的心中，正所谓念念不忘，必有回想，想一次性解决这个疑难杂症，
 
 	讨论这个问题时，我们要思考几个问题，并假定好条件
 	
 	1. finally是否一定会执行?
-	2. 讨论的问题是try-catch-finally-catch块中的基本数据类型还是引用数据类型（如int和List）
+	2. 讨论的问题是try-catch-finally-catch块中的基本数据类型还是引用数据类型（如int和StringBuffer）
 	
 
 ## 1.finally是否会执行?
@@ -302,7 +303,7 @@
 
 第八种 之前讨论的错误都是在try中，现在在catch中也报错
 
-    public int say() {
+    public int sayXx() {
         int value = 0;
         try {
             value = value + 10;
@@ -328,8 +329,59 @@
 	Step1->10
 	Step3->1010
 	Step4->11010
-	say->11011
+	sayXx->11011
+
+
+
+## 3.我们讨论是引用数据类型StringBuffer
+	
+    //注意：返回StringBuffer跟String差别很大，String会当作基本类型处理，最后的finally语句会执行，但不会把finally值带上。
+    public StringBuffer sayXx() {   						  
+        StringBuffer stringBuffer = new StringBuffer();
+        try {
+            stringBuffer.append("try1");
+            int i=1/0;
+            stringBuffer.append(",try2");
+            return stringBuffer;
+        } catch (Exception e) {
+            stringBuffer.append(",catch");
+            return stringBuffer;
+        } finally {
+            stringBuffer.append(",finally");
+        }
+    }
+
+
+	当...执行正常，catch语句执行，打印结果如下:
+
+	sayXx->try1,try2,catch,finlly
+
+	当...执行异常，catch语句执行，打印结果如下:
+
+	sayXx->try1,catch,finlly
+
+	我们发现当有返回引用类型时，会将finally值也带上。
 
 ## 结论
+	
+	对于基本类型而言
+	
+	1. 1个return时，try,catch，finally语句中，会返回对应块的返回值，finally块一定会执行，
+	   若finally块存在表达式计算的，只有是return在finally块中，才会被返回
+	
+	2. 2个return时，若在finally块中存在return,它会抢断try,catch中的return
+	
+	3. 3个return时，理解了前面两个，这个就很好理解了。
+	
+	4. try,catch中的return后面包含表达式或函数时，会先执行表达式或函数，得到值1，然后执行finally，得到值2，
+	   若finally块存在return,返回值2  
+	   若finally块不存在return,返回值1
 
-## 3.我们讨论是引用数据类型List	
+	对于引用类型而言
+	
+	1. 走正常的try..catch..finally，finally块的值会被带出去。
+
+
+## 原理
+	
+	jvm,局部变量,引用地址，子例程,
