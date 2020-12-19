@@ -1,9 +1,9 @@
 # try-catch-finally-return
 	
 ## 前言
-
+	
 	//可能是我们村写的最好的
-	try-catch-finally-return的问题一直萦绕在我的心中，正所谓念念不忘，必有回想，想一次性解决这个疑难杂症，
+	try-catch-finally-return的问题一直萦绕在我的心中，正所谓念念不忘，必有回想，想一次性解决这个疑难杂症，这篇文章可能是我们村写的最好的
 
 	讨论这个问题时，我们要思考几个问题，并假定好条件
 	
@@ -361,6 +361,47 @@
 	sayXx->try1,catch,finlly
 
 	我们发现当有返回引用类型时，会将finally值也带上。
+
+## 4.如何保证函数的完整
+	    
+第一种
+
+	    public int say() {
+	        try {
+				return i;
+	        } catch (Exception e) {
+				return i;
+	        } finally {
+				
+	        }
+    	}
+
+第二种
+
+		public int say() {
+	        try {
+	
+	        } catch (Exception e) {
+	
+	        } finally {
+				return i;
+	        }
+    	}
+
+
+第三种	
+
+	    public int say() {
+	        try {
+	
+	        } catch (Exception e) {
+	
+	        } finally {
+	
+	        }
+	        return i;
+    	}
+
 
 ## 结论
 	
