@@ -1,2 +1,2 @@
 # md
-record learn
+记录学习，归纳总结
