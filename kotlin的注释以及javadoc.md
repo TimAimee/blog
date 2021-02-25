@@ -5,7 +5,7 @@
 	File -> Settings -> Appearance & Behavior -> System settings -> Updates
 	Use secure connection (不要勾选这个选项，去掉这个选项前面的√)
 
-## kotlin生成javaDoc
+# kotlin生成javaDoc
 
 引用dokka包
 
