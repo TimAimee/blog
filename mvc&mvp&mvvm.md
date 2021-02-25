@@ -14,7 +14,7 @@
 	1. 我们将Activity页面中存在的逻辑抽象出来定义一个接口IxxxPresent
 	2. 我们将Activity页面中存在的界面变化出来定义一个接口IxxxView
 	3. 构建一个IxxxPresentImp类，IxxxPresentImp类继承自接口IxxxPresent,IxxxPresentImp类声明一个构造方法,要求传入参数IxxxView
-	4. 复写并实现接口的方法,在接口的方法内部可调用IxxxView的方法。
+	4. IxxxPresentImp类复写并实现接口的方法,在接口的方法内部可调用IxxxView的方法。
 	5. xxxActivity类继承接口IxxxView，复写并实现接口的方法
 	6. 在xxxActivity类的oncreat中实例化IxxxPresentImp对象
 	7. 在xxxActivity类必要的地方去调用IxxxPresentImp对象的方法
