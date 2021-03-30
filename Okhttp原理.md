@@ -164,3 +164,25 @@ OkHttpClient调用
 	02-08 14:07:34.120 16964-16964/com.timaimee.demohband I/BInterceptor: response:Response{}
 	02-08 14:07:34.120 16964-16964/com.timaimee.demohband I/AInterceptor: response:Response{}
 	02-08 14:07:34.120 16964-16964/com.timaimee.demohband I/ChainActivity: Response{}
+
+
+
+## Okhttp的缓存
+
+	Okhttp的是LRU缓存,内部是由LinkedHashMap实现，LinkedHashMap是一个双向链表，最常使用的元素会放到链表的尾部，链表的头部为最不常用的数据，新元素也会插入到尾部。
+	
+	LinkedHashMap.put->HashMap.put->jdk1.8中是插入尾部的。
+
+	当cache的大小超过定义的大小时，会回收缓存 
+
+## 连接池
+	
+	创建okhttpClient开始就会有生成一个连接池，允许5个连接，空闲连接最多存活5分钟
+	
+## transmitter
+	
+	1.new call()            创建 transmitter
+	2.excute                传入 transmitter
+	3.retryIntercepter      调用 transmitter.prepareconnect (判断连接复用，释放已有连接，创建新连接，生成路由选择，准备代理服务器等)
+	4.connectIntercepter    调用 transmitter.excahnge, 主要是socket操作connect
+	5.callserverIntercepter 主要是 socket write,socket input
