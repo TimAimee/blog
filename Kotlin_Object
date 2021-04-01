@@ -1,0 +1,46 @@
+# object 关键字
+
+## 单例类 对象声明
+
+	object RepositoryManager{
+	    fun method(){
+	        println("I'm in object declaration")
+	    }
+	}
+
+------------------
+
+## 静态方法 伴生对象
+
+	class ObjectTest {
+	
+	    companion object MyObjec{
+	
+	        val a = 20
+	
+	        fun method() {
+	            println("I'm in companion object")
+	        }
+	    }
+	}
+	 
+
+-------------------
+
+## 匿名内部类 对象表达式
+
+	interface Teacher {
+	    fun talk()
+	}
+	
+	fun main(args: Array<String>) {
+	
+	    val tecacher = object : Teacher {
+	        override fun talk() {
+	            println("a invoked")
+	        }
+	    }
+	
+	    tecacher.talk()
+	}
+ 
